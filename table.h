@@ -3,18 +3,19 @@
 
 // Structure pour une ligne (row)
 typedef struct {
-    int id;        // Identifiant unique de la ligne
-    char name[50]; // Nom associé à la ligne (limité à 50 caractères)
-    int age;       // Âge de la personne
+	int id;        // Identifiant unique
+	char name[50]; // Nom
+	int age;       // Âge
 } Row;
 
 // Structure pour une table
 typedef struct {
-    Row rows[5];   // Tableau fixe pour stocker jusqu'à 5 lignes
-    int size;      // Nombre actuel de lignes insérées dans la table
+	Row rows[5];   // Tableau fixe de 5 lignes
+	int size;      // Nombre actuel de lignes
 } Table;
 
-// Déclaration de la fonction pour insérer une ligne
+// Déclaration des fonctions
 void insert_row(Table *table, int id, char name[], int age);
+void select_rows(const Table *table);
 
 #endif // TABLE_H
