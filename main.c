@@ -1,29 +1,64 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 #include "table.h"
 
-// Point d'entrée principal du programme
+// Fonction pour afficher le menu
+void afficher_menu() {
+	printf("\nMenu :\n");
+	printf("1. INSERT : Ajouter une ligne\n");
+	printf("2. SELECT : Afficher toutes les lignes\n");
+	printf("3. DELETE : Supprimer une ligne par ID\n");
+	printf("4. QUIT : Quitter le programme\n");
+	printf("Entrez votre choix : ");
+}
+
 int main() {
-	// Affiche un message de bienvenue
+	// Initialisation de la table
+	Table table;
+	table.size = 0;
+
+	int choix;
+	int id;
+	char name[50];
+	int age;
+
 	printf("Bienvenue dans le projet CC1 !\n");
 
-	// Initialisation d'une table
-	Table table;
-	table.size = 0; // La table commence vide
-	printf("La table est initialisée avec une capacité de 5 lignes et contient %d ligne(s).\n", table.size);
+	// Boucle principale
+	while (1) {
+		afficher_menu();
+		scanf("%d", &choix);
 
-	// Insère des lignes dans la table
-	insert_row(&table, 1, "Alice", 25);
-	insert_row(&table, 2, "Bob", 30);
-	insert_row(&table, 3, "Charlie", 35);
+		switch (choix) {
+			case 1: // INSERT
+				printf("Entrez l'ID : ");
+				scanf("%d", &id);
+				printf("Entrez le nom : ");
+				scanf("%s", name);
+				printf("Entrez l'âge : ");
+				scanf("%d", &age);
+				insert_row(&table, id, name, age);
+				break;
 
-	// Affiche les lignes insérées
-	select_rows(&table);
+			case 2: // SELECT
+				select_rows(&table);
+				break;
 
-	// Suppression d'une ligne
-	delete_row(&table, 1);
+			case 3: // DELETE
+				printf("Entrez l'ID à supprimer : ");
+				scanf("%d", &id);
+				delete_row(&table, id);
+				break;
 
-	// Affiche les lignes restantes
-	select_rows(&table);
+			case 4: // QUIT
+				printf("Au revoir !\n");
+				return 0;
 
-	return 0; // Fin du programme
+			default:
+				printf("Choix invalide. Veuillez réessayer.\n");
+		}
+	}
+
+	return 0;
 }
